@@ -27,3 +27,15 @@ En estos se puede observar como, al haber una mayor densidad de píxeles en Cann
 Como conclusión, considero que la herramienta Canny es mucho más efectiva ya que las zonas que se encuentran entre los valores marcados coinciden con los ojos, nariz y boca, por lo que confío mucho más en este algoritmo para encontrar estos patrones en cualquier imagen. La herramienta Sobel consigue acercarse en las filas pero no es tan preciso y falla completamente con las columnas.
 
 ## Tarea 3
+
+Para esta tarea se inspiró en la cortina de privacidad utilizando Canny, donde una columna roja detecta y sigue el movimiento en base a la diferencia de contornos entre frames.
+
+En primer lugar, se obtiene el frame de la webcam y se covierte a escala de grises con un suavizado Gaussiano para reducir el ruido. Posteriormente, con una variable de fondo se obtiene la diferencia entre el frame anterior y el actual, añadiendo además una función de OpenCV llamada "accumulateWeighted()" que permite a este filtro adaptarse y eliminar restos de diferencias anteriores que pueden afectar a la detección ("fantasmas").
+
+Una vez obtenida la diferencia, se umbraliza tomando los valores entre 100 y 200, para posteriormente realizar el conteo de píxeles por columnas. El objetivo que se quiere alcanzar es localizar el centro de las columnas con contornos, por lo que se realiza la media entre estas y sae obtiene la posición sobre la que se dibujará la cortina.
+
+Finalmente, se realiza el dibujado que se va moviendo cada 25 frames, con un ancho de 160 píxeles va siguiendo poco a poco el movimiento que se supone es una persona.
+
+La tarea muestra tanto la imagen final con la cortina, como la diferencia de contornos entre frames en otra ventana.
+
+Para finalizar con el proceso, se pulsa la tecla "ESC".
